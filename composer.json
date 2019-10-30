@@ -6,6 +6,8 @@
     },
     "require": {
         "cboden/ratchet": "^0.4.1",
-        "react/zmq": "^0.4.0"
+        "react/zmq": "^0.4.0",
+        "ext-json": "*",
+        "ext-zmq": "*"
     }
 }

@@ -8,16 +8,35 @@
     <title>Document</title>
 </head>
 <body>
+<button onclick="addPost()">Add Post</button>
+<script src="autobanh.js"></script>
 <script>
 
-    let conn = new WebSocket('ws://localhost:8080');
-    conn.onopen = e => {
-        console.log('Connection established!!')
-        conn.send('hola');
+    function addPost () {
+        return fetch('add-post.php', { method: 'POST' })
     }
-    conn.onmessage = e => {
-        console.log(e);
+
+    function onOpen() {
+        console.log('Opened connection');
+        conn.subscribe('testTopic', (topic, data) => {
+            console.log({
+                topic,
+                data
+            })
+        })
     }
+
+    function onClose() {
+        console.log('Closed connection')
+    }
+
+    const options = {
+        skipSubprotocolCheck: true,
+        debug: true
+    };
+
+    let conn = new ab.Session('ws://localhost:8080', onOpen, onClose, options)
+
 </script>
 </body>
 </html>
